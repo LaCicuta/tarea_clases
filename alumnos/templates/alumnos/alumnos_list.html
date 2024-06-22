@@ -10,37 +10,51 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
     </head>
     <body>
-        <h1>Editar datos de alumno</h1>
-        <br>
-
-        <button type="button">
-            <a href="{% url 'alumnosAdd' %}">Agregar</a>
-        </button>
-
-        <div id="idMensajes">
+        <div class="container">
+            <h1 class="text-center">Editar datos de alumno</h1>
+            <br>
+    
+            <div class="text-center">
+                <button type="button" class="btn btn-primary">
+                    <a href="{% url 'alumnosAdd' %}" class="text-decoration-none text-white">Agregar</a>
+                </button>
+            </div>
+            <br>
+    
+            <table class="table table-striped table-bordered">
+                {% if alumnos %}
+                    <thead>
+                        <tr>
+                            <th>Rut</th>
+                            <th>Nombre</th>
+                            <th>Apellido P.</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in alumnos %}
+                            <tr>
+                                <td>{{ x.rut }}</td>
+                                <td>{{ x.nombre }}</td>
+                                <td>{{ x.apellido_paterno }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-around">
+                                        <a href="{% url 'alumnos_del' pk=x.rut %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                        <a href="{% url 'alumnos_findEdit' pk=x.rut %}" class="btn btn-primary btn-sm">Modificar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+        <div id="idMensajes" class="alert text-center">
             {% if mensaje %}
                 {{mensaje}}
             {% endif %}
-            </div>
-            
-            <table>
-                {% if alumnos %}
-                    <th>Rut</th>
-                    <th>Nombre</th>
-                    <th>Apellido P.</th>
-                    <th>Eliminar</th>
-                    {% for x in alumnos %}
-                        <tr>
-                            <td>{{ x.rut }}</td>
-                            <td>{{ x.nombre }}</td>
-                            <td>{{ x.apellido_paterno }}</td>
-                            <td><a href="{% url 'alumnos_del' pk=x.rut %}">Eliminar</a></td>
-                            <td><a href="{% url 'alumnos_findEdit' pk=x.rut %}">Modificar</a></td>
-                            
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            </table>
+        </div>
+    </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script>
             $(document).ready(function(){
