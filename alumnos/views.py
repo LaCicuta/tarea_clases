@@ -135,7 +135,11 @@ def alumnosUpdate(request):
         context={'alumnos':alumnos}
         return render(request, 'alumnos/alumnos_list.html', context)
         
-
+def crud_generos(request):
+    generos=Genero.objects.all()
+    context = {'generos':generos}
+    print("Enviados datos generos_list")
+    return render(request, "alumnos/generos_list.html", context)
         
     
         
