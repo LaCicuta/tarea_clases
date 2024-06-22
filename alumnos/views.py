@@ -63,6 +63,6 @@ def alumnosAdd(request):
             print("Objeto Alumno creado:", obj)
             obj.save()
             print("Datos guardados en la base de datos")
-            context['mensaje'] = "Ok, datos guardados..."
+            context = {'mensaje': "Ok, datos guardados..."}
             return render(request, 'alumnos/alumno_add.html', context)
         
