@@ -34,6 +34,8 @@
                             <td>{{ x.rut }}</td>
                             <td>{{ x.nombre }}</td>
                             <td>{{ x.apellido_paterno }}</td>
+                            <td><a href="{% url 'alumnos_del' pk=x.rut %}">Eliminar</a></td>
+                            <td><a href="{% url 'alumnos_findEdit' pk=x.rut %}">Modificar</a></td>
                             
                         </tr>
                     {% endfor %}

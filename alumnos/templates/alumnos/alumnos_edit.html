@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Editar Alumno</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        
+        <div style=" text-align: center">
+
+            {% if alumno %}
+                <h2>Formulario actualizar alumnos</h2><br>
+                <form action="{% url 'alumnosUpdate' %}" method="POST">
+                    {% csrf_token %}
+
+                    <pre>Rut: <input type="text" name="rut" value="{{alumno.rut}}" readonly></pre>
+                    <pre>Nombre <input type="text" name="nombre" value="{{alumno.nombre}}"></pre>
+                    <pre>Apellido P.: <input type="text" name="paterno" id="" value="{{alumno.apellido_paterno}}"></pre>
+                    <pre>Apellido M.: <input type="text" name="materno" id="" value="{{alumno.apellido_materno}}"></pre>
+                    <pre>Fecha Nac.: <input type="date" name="fechaNac" value="{{alumno.fecha_nacimiento|date:"Y-m-d"}}"></pre>
+                    <pre>Genero: <select name="genero" >
+                        {% for genero in generos %}
+                            {% if genero.genero == alumno.id_genero.genero %}
+                                <option value="{{genero.id_genero}}" selected>{{genero.genero}}</option>
+                            {% else %}
+                                <option value="{{genero.id_genero}}">{{genero.genero}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></pre>
+                    <pre>Celular: <input type="text" name="telefono" id="" value="{{alumno.telefono}}"></pre>
+                    <pre>Email: <input type="text" name="email" id="" value="{{alumno.email}}"></pre>
+                    <pre>Direccion: <input type="text" name="direccion" id="" value="{{alumno.direccion}}"></pre>
+
+                    <input type="submit" name="opcion" value="Actualizar">
+                    
+
+                </form><br><br>
+            {% endif %}
+            <div id="idMensajes">
+                {% if mensaje %}
+                    {{mensaje}}
+                {% endif %}
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>
+                $(document).ready(function(){
+                    $("#idMensajes").delay(2000).fadeOut("slow");
+                });
+        </script>
+
+    </body>
+</html>
